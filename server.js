@@ -31,6 +31,17 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: "Hi Whatsuppp..." });
 });
 
+// API Endpoint to Fetch All Feedback Data
+app.get('/api/feedbacks', async (req, res) => {
+  try {
+    const feedbacks = await Feedback.find(); // Fetch all feedback documents
+    res.status(200).json(feedbacks); // Return the feedback data as JSON
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while fetching feedback data.' });
+  }
+});
+
+
 // API Endpoint to Add Feedback
 app.post('/api/feedback', async (req, res) => {
   try {
@@ -50,22 +61,7 @@ app.post('/api/feedback', async (req, res) => {
 });
 
 
-app.post('/api/feedback', async (req, res) => {
-    try {
-      const { name, email, message } = req.body;
-  
-      const newFeedback = new Feedback({
-        name,
-        email,
-        message,
-      });
-  
-      await newFeedback.save();
-      res.status(201).json({ message: 'Feedback saved successfully!' });
-    } catch (error) {
-      res.status(500).json({ error: 'An error occurred while saving feedback.' });
-    }
-  });
+
 
   // API Endpoint to Delete Feedback by ID
 app.delete('/api/feedback/:id', async (req, res) => {
