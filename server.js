@@ -26,6 +26,11 @@ const feedbackSchema = new mongoose.Schema({
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
 
+// API Endpoint to Return a Hello Message
+app.get('/api/hello', (req, res) => {
+  res.status(200).json({ message: "Hi Whatsuppp..." });
+});
+
 // API Endpoint to Add Feedback
 app.post('/api/feedback', async (req, res) => {
   try {
